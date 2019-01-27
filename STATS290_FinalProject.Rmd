@@ -1,0 +1,42 @@
+---
+title: "STATS 290 Project"
+author: "Ryan Triolo"
+date: "1/26/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Existing Energy Related R Packages
+
+**eAnalytics**
+
+*"eAnalytics is a web application built on top of R that provides dynamic data analytics to energy industry stakeholders. The application allows users to dynamically manipulate chart data and style through the Shiny package’s reactive framework. eAnalytics currently supports a number of features including interactive datatables, dynamic charting capabilities, and the ability to save, download, or export information for further use. Going forward, the goal for this project is that it will serve as a research hub for discovering new relationships in the data. The application is illustrated with a simple tutorial of the user interface design."*
+
+More info: https://openresearchsoftware.metajnl.com/articles/10.5334/jors.144/
+
+\bigskip
+
+**energyr**
+
+*"Data published by the United States Federal Energy Regulatory Commission including electric company financial data, natural gas company financial data, hydropower plant data, liquified natural gas plant data, oil company financial data natural gas company financial data, and natural gas storage field data."*
+
+More info: https://cran.r-project.org/web/packages/energyr/index.html
+
+\bigskip
+
+**energyRt**
+
+*"energyRt is a package for R to develop Reference Energy System (RES) models and analyze energy-technologies. energyRt package provides tools to build RES (“Bottom-Up”), technological, linear cost-minimizing models, which can be solved using GAMS and GLPK. The RES model has similarities with TIMES/MARKAL, OSeMOSYS, but has its own specifics, f.i. definition of technologies."*
+
+More info: http://olugovoy.github.io/energyRt/
+
+\bigskip
+
+**RPowerLabs Project**
+
+More info: http://rpowerlabs.org/
+
+ALSO LOOK AT THIS: https://en.wikipedia.org/wiki/Open_energy_system_models
