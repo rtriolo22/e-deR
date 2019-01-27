@@ -20,8 +20,8 @@ private directory with the name `proposal.Rmd`.
    Name2`.
 
 ```{r q0}
-authors <- list(sunet1 = "Full Name1",
-                sunet2 = "Full Name2")
+authors <- list(sunet1 = "rtriolo",
+                sunet2 = "rraina")
 ```
 
 1. What is your package trying to achieve?  Who is it aimed at?
@@ -127,7 +127,7 @@ languages <- list(
     ,
     sunet2 = c(cxx = none,
                java = proficient,
-               python = proficient,
+               python = basic,
                julia = none,                
                ruby = none)
 )
