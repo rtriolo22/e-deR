@@ -20,32 +20,19 @@ private directory with the name `proposal.Rmd`.
    Name2`.
 
 ```{r q0}
-authors <- list(sunet1 = "rtriolo",
-                sunet2 = "rraina")
+authors <- list(rtriolo = "Ryan Triolo",
+                rraina = "Raj Raina")
 ```
 
 1. What is your package trying to achieve?  Who is it aimed at?
 
 ```q1
 
-1.  Querying.  The package will enable users to query the Adverse
-Events Database and other databases on OpenFDA from R. For example,
-they could query information about events and patients.
+This package is aimed at electricity users that have flexible loads and would like to offer services to the grid operator, utility, or aggregator. Examples of electricity users with flexible loads include owners of Tesla PowerWalls, electric vehicle owners, buidings with controllable thermostats, owners of distributed generation. 
 
-2.  Visualization.  The package will also provide tools to
-visualize for an inquired drug the relationship between adverse event
-counts/types and time, drug pair, patient's weight, age, gender and
-other variables.
+The most common way that such a user of electricity would offer a product to the electricity market is through a "load drop". This is when an electricity customer reduces their load in exchange for a payment from the system operator. One challenge is that when a user reduces electricity usage, the couterfactual remains unknown. How much electricity would the user have been consuming if they hadn't dropped reduced their load. 
 
-3.  Analysis.  It will also include three functions to analyze
-if 1) there are spikes in adverse event happenings, 2) if spikes
-are related to drug recalls or enforcement and then 3) other
-visualizations such as principal component charts to see which
-variables contribute the most to certain phenomena.
-
-The package is aimed at analysts and scientists in pharmaceutical
-companies, research institutions, health care organizations, and other
-administrative organizations (i.e., FDA).
+In order to calculate payments, utilities will calculate a "baseline" and the difference between the baseline and the actual usage will be the amount of the actual load drop. The most common way that utilities calculate baselines is known as a 10-of-10 baseline. This is the average hourly load of the last 10 weekdays. Calculating this baseline at any point in time for a user with a historical load data feed will be the central functionality of the package.
 
 ```
 
@@ -56,17 +43,20 @@ administrative organizations (i.e., FDA).
 
 ```q2
 
-This package design is inspired by the OpenFDA Developer Challenge
-(Option 1, Level 1). A link to the developer Challenge announcement is
-here
+This package is in response to the changing conditions of the electricity grid, and an effort to enable increased participation of distribution scale resources. 
 
-https://open.fda.gov/about/updates/2015_05_11_an_open_challenge_to_tap_public_data/
+One initiative is the Green Button initiative that responds to a White House "call-to-action to provide utility customers with easy and secure access to their energy usage information in a consumer-friendly and computer-friendly format for electricity ... usage"
 
-The challenge is broken into three phases. The first phase is
-identifying spikes based on drug queries and "bucketizing variables
-over time, weight, gender or drug pairs." The project will address
-this level of the challenge and will also provide tools for
-visualization and analysis.
+More information on Green Button Data and the Green Button initiative is available here:
+http://www.greenbuttondata.org/
+
+In addition, there are increasing pathways for distribution level assets to actively participate in wholesale electricity markets. FERC Order 745, filed in 2011 and upheld in the Supreme Court in 2016 requires that Independent System Operators design market rules enabling demand response resources to receive compensation at LMP ($/MWh) for load reduction products.
+
+FERC Order 745:
+https://www.ferc.gov/EventCalendar/Files/20110315105757-RM10-17-000.pdf
+
+The challenge for distributed resources is to process data quickly and continuously in order to make automated decisions regarding expected compensation and the opportunity cost of dropping load.
+
 
 ```
 
@@ -75,17 +65,11 @@ visualization and analysis.
 
 ```q3
 
-Scientists will query the R package for adverse events and patient
-information. The queries will allow them to pass arguments.
+The use case would be for an electricity user that is participating in the wholesale market, to be able to quickly calculate their exact or expected baseline and enable a more informed decision about offering a load drop product.
 
-Scientists can also visualize the results of their queries.
 
-Scientists will also be able to utilize the analytical functions to
-discover assocations among variables.
 
-Administrative organizations will query the R package for adverse
-event patterns in order to monitor the drug market.  These queries can
-also be parameterized by the user.
+
 
 ```
 
@@ -95,11 +79,8 @@ also be parameterized by the user.
 
 ```q4
 
-The R package will provide the following functions: reading and
-writing data, creating graphs and visualizations, running
-parameterized queries against datasets, providing for download
-capabilibities of both data and graphics.  The R package will also
-provide functions for deeper analysis by the user.
+The central functionality of the package will be to take in historical load data and output the baseline load for the upcoming day. We hope to also include visualization capability, and ability to interact with forecasts of price, or site load, to enable users to consider more precise opportunity cost when bidding into wholesale markets.
+
 
 ```
 
@@ -119,13 +100,13 @@ dangerous <- "dangerous :-)"
 languages <- list(
     ## replace the sunet1 and sunet2 as you did above and edit
     ## appropriately for each member
-    sunet1 = c(cxx = none,
-               java = proficient,
+    rtriolo = c(cxx = basic,
+               java = none,
                python = proficient,
-               julia = dangerous, 
+               julia = basic, 
                ruby = none)
     ,
-    sunet2 = c(cxx = none,
+    rraina = c(cxx = none,
                java = proficient,
                python = basic,
                julia = none,                
