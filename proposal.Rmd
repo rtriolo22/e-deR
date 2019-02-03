@@ -30,9 +30,12 @@ authors <- list(rtriolo = "Ryan Triolo",
 
 This package is aimed at electricity users that have flexible loads and would like to offer services to the grid operator, utility, or aggregator. Examples of electricity users with flexible loads include owners of Tesla PowerWalls, electric vehicle owners, buidings with controllable thermostats, owners of distributed generation. 
 
-The most common way that such a user of electricity would offer a product to the electricity market is through a "load drop". This is when an electricity customer reduces their load in exchange for a payment from the system operator. One challenge is that when a user reduces electricity usage, the couterfactual remains unknown. How much electricity would the user have been consuming if they hadn't dropped reduced their load. 
+The most common way that such a user of electricity would offer a product to the electricity market is through a "load drop". This is when an electricity customer reduces their load in exchange for a payment from the system operator. One challenge is that when a user reduces electricity usage, the counterfactual remains unknown. That is, how much electricity would the user have been consuming if they hadn't dropped reduced their load?
 
-In order to calculate payments, utilities will calculate a "baseline" and the difference between the baseline and the actual usage will be the amount of the actual load drop. The most common way that utilities calculate baselines is known as a 10-of-10 baseline. This is the average hourly load of the last 10 weekdays. Calculating this baseline at any point in time for a user with a historical load data feed will be the central functionality of the package.
+In order to calculate payment settlements, utilities will calculate a "baseline" and the difference between the baseline and the actual usage will be the amount of the load drop for which the user is paid. The most common way that utilities calculate baselines is known as a 10-of-10 baseline. This is the average hourly load of the last 10 weekdays. Calculating this baseline at any point in time for a user with a historical load data feed will be the central functionality of the package.
+
+In addition, the package will allow users to perform some simple load analytics and enable forecasting tools.
+
 
 ```
 
@@ -45,12 +48,12 @@ In order to calculate payments, utilities will calculate a "baseline" and the di
 
 This package is in response to the changing conditions of the electricity grid, and an effort to enable increased participation of distribution scale resources. 
 
-One initiative is the Green Button initiative that responds to a White House "call-to-action to provide utility customers with easy and secure access to their energy usage information in a consumer-friendly and computer-friendly format for electricity ... usage"
+One initiative is the Green Button initiative that responds to a "White House call-to-action to provide utility customers with easy and secure access to their energy usage information in a consumer-friendly and computer-friendly format for electricity ... usage"
 
 More information on Green Button Data and the Green Button initiative is available here:
 http://www.greenbuttondata.org/
 
-In addition, there are increasing pathways for distribution level assets to actively participate in wholesale electricity markets. FERC Order 745, filed in 2011 and upheld in the Supreme Court in 2016 requires that Independent System Operators design market rules enabling demand response resources to receive compensation at LMP ($/MWh) for load reduction products.
+In addition, there are increasing pathways for distribution level assets to actively participate in wholesale electricity markets. FERC Order 745, filed in 2011 and upheld in the Supreme Court in 2016 requires that Independent System Operators design market rules enabling demand response resources to receive compensation at locational marginal price (LMP - $/MWh) for demand response products.
 
 FERC Order 745:
 https://www.ferc.gov/EventCalendar/Files/20110315105757-RM10-17-000.pdf
@@ -65,10 +68,11 @@ The challenge for distributed resources is to process data quickly and continuou
 
 ```q3
 
-The use case would be for an electricity user that is participating in the wholesale market, to be able to quickly calculate their exact or expected baseline and enable a more informed decision about offering a load drop product.
+Two potential use cases:
 
+1. A utility customer that is actively participating in a price responsive demand program and is subject to baselining. Such a user would be able to quickly calculate their exact or expected baseline and enable a more informed decision about offering a load drop product.
 
-
+2. A utility customer that is considering investing in a load control equipment (Tesla PowerWall, smart EV charger, controllable thermostat) could use this tool to assess the value that they could achieve by participating in the market.
 
 
 ```
@@ -79,7 +83,12 @@ The use case would be for an electricity user that is participating in the whole
 
 ```q4
 
-The central functionality of the package will be to take in historical load data and output the baseline load for the upcoming day. We hope to also include visualization capability, and ability to interact with forecasts of price, or site load, to enable users to consider more precise opportunity cost when bidding into wholesale markets.
+The central functionality of the package will be to take in historical load data and output the baseline load for the upcoming day. We hope to also include visualization capability, simple load analytics, and ability to integrate forecasts of price, or site load, to enable users to consider more precise opportunity cost when bidding into wholesale markets.
+
+An extension that we would like to include (perhaps in a future version of the package), is integration with utility data APIs to automate the handling of electricity data. One such service is UtilityAPI. 
+
+More information on UtilityAPI is available here:
+https://utilityapi.com/
 
 
 ```
