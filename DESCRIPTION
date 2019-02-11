@@ -1,0 +1,23 @@
+Package: e-deR
+Type: Package
+Title: Package to read and display information related to energy usage
+Version: 1.0
+Date: 2019-02-11
+Authors@R: c(person(“Raj”, “Raina”,
+                    role = c("aut", "cre"),
+                    email = “rraina@stanford.edu”), person(“Ryan”, “Triolo”,
+                    role = c("aut", "cre"),
+                    email = “rtriolo@stanford.edu”))
+Depends: R (>= 3.5)
+Imports:
+    magrittr,
+    tibble,
+    dplyr,
+    ggplot2,
+    scales,
+    Rcpp
+Description: Demonstrates R packaging and linking to external code.
+License: GPL-2
+RoxygenNote: 6.1.1
+LinkingTo: Rcpp
+Encoding: UTF-8
