@@ -2,7 +2,7 @@
 #'
 #' @description Power usage information for particular household
 #'
-#' @param data data containing power information
+#' @param power_data data containing power information
 #' @return  A data frame containing a modified version of the power data
 #'
 #' @export
@@ -18,8 +18,8 @@
 #'
 #' 
 #' @examples 
-#' household_data <- read.csv("POWER_USAGE_DATA")
-#' ingestData(household_data)
+#' household_power_data <- read.csv("POWER_USAGE_DATA")
+#' ingestData(household_power_data)
 #' @keywords utilities
 
 

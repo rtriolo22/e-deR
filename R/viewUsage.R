@@ -2,7 +2,7 @@
 #'
 #' @description Power usage analytical statistics for particular household
 #'
-#' @param data data containing power information
+#' @param power_data data containing power information
 #' 
 #' @param type an indication if you want total or average usage
 #' 
@@ -17,8 +17,9 @@
 #'
 #' 
 #' @examples 
-#' household_data <- ingestData(household_data)
-#' viewUsage(household_data, "total", "seasonally")
+#' household_power_data <- read.csv("POWER_USAGE_DATA")
+#' household_power_data <- ingestData(household_power_data)
+#' viewUsage(household_power_data, "total", "seasonally")
 #' @keywords utilities
 
 
