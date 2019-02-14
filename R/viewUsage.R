@@ -18,6 +18,8 @@
 #' @import stringr 
 #' @import base
 #' @import datetime
+#' @import lubridate
+#' @import stats
 #'
 #' 
 #' @examples 
@@ -26,7 +28,7 @@
 
 
 viewUsage <- function(power_data, type = c("total", "average"), 
-                      window = c("weekly", "monthly", "seasonal"))
+                      window = c("weekly", "monthly", "seasonally"))
 {
   #DELETE: power_data = read.csv("intervals_7288510005.csv")
   
@@ -35,8 +37,10 @@ viewUsage <- function(power_data, type = c("total", "average"),
            %in% colnames(power_data))))
   {
     stop("Data must contain columns: 
-         interval_start, interval_end, interval_kWh, interval_kW")
+         \"interval_start\", \"interval_end\", \"interval_kWh\", \"interval_kW\"")
   }
+  
+  ## THIS CODE INGESTS DATA AND MUTATES FRAME INTO MORE MANAGEABLE FORMAT
   
   #Subset to only necessary columns
   power_data <- power_data %>% subset(select = c("interval_start", "interval_end", 
@@ -61,4 +65,86 @@ viewUsage <- function(power_data, type = c("total", "average"),
                                       day_end = day_end, time_end = time_end,
                                       interval_length_hours = interval_length_hours) %>% 
                                       select(-interval_start, -interval_end)
+  
+  #Parse out the week/month/season
+  power_data <- power_data %>% mutate(week = week(as.POSIXct(power_data$day_start, format = "%m/%d/%Y")))
+  power_data[(month(as.POSIXct(power_data$day_start, format = "%m/%d/%Y")) == 12 & 
+                day(as.POSIXct(power_data$day_start, format = "%m/%d/%Y")) == 31),]$week = 52 #fix slight bug
+  
+  power_data <- power_data %>% mutate(month = month(as.POSIXct(power_data$day_start, format = "%m/%d/%Y")))
+  
+  #Helper function for calculation of the season
+  getSeason <- function(input.date){
+    numeric.date <- 100*month(input.date)+day(input.date)
+    ## input Seasons upper limits
+    cuts <- cut(numeric.date, breaks = c(0,319,0620,0921,1220,1231)) 
+    # rename the resulting groups
+    levels(cuts) <- c("Winter","Spring","Summer","Fall","Winter")
+    return(cuts)
+  }
+  
+  power_data <- power_data %>% mutate(season = getSeason(as.POSIXct(power_data$day_start, format = "%m/%d/%Y")))
+  
+  
+  
+  
+  
+  ## THIS CODE CALCULATES THE LOAD ANALYTICS
+  type = match.arg(type)
+  window = match.arg(window)
+  
+  #Check if args are properly formatted
+  if(type != "total " && type != "average")
+  {
+    stop("type must be:
+         \"total\" or \"average\"")
+  }
+  if(window != "weekly " && window != "monthly" && window != "seasonally")
+  {
+    stop("window must be:
+         \"weekly\", \"monthly\", \"seasonally\"")
+  }
+  
+
+  if(window == "weekly")
+  {
+    if(type == "total")
+    {
+      aggregate(power_data$interval_kW, by = list(power_data$week), FUN = sum)
+    }
+    if(type == "average")
+    {
+      aggregate(power_data$interval_kW, by = list(power_data$week), FUN = mean)
+    }
+  }
+  
+  if(window == "monthly")
+  {
+    if(type == "total")
+    {
+      aggregate(power_data$interval_kW, by = list(power_data$month), FUN = sum)
+    }
+    if(type == "average")
+    {
+      aggregate(power_data$interval_kW, by = list(power_data$month), FUN = mean)
+    }
+  }
+  
+  if(window == "seasonally")
+  {
+    if(type == "total")
+    {
+      aggregate(power_data$interval_kW, by = list(power_data$season), FUN = sum)
+    }
+    if(type == "average")
+    {
+      aggregate(power_data$interval_kW, by = list(power_data$season), FUN = mean)
+    }
+  }
+  
+  
+  
+  
+  
+  
 }
