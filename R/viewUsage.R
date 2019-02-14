@@ -28,6 +28,15 @@ viewUsage <- function(power_data, type = c("total", "average"),
 {
   #DELETE: power_data = read.csv("intervals_7288510005.csv")
   
+  #Make sure data is properly formatted
+  if(any(!(c("interval_kW", "week", "month", "season") 
+           %in% colnames(power_data))))
+  {
+    stop("Data must contain columns: 
+         \"interval_kW\", \"week\", \"month\", \"season\".
+         (NOTE: Data may not have been ingested. See documentation.)")
+  }
+  
   ## THIS CODE CALCULATES THE LOAD ANALYTICS
   type = match.arg(type)
   window = match.arg(window)
